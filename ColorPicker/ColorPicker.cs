@@ -130,8 +130,6 @@ namespace ColorPicker
         private static void OnColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             Color newColor = (Color)e.NewValue;
-            Color oldColor = (Color)e.OldValue;
-
             ColorPicker picker = (ColorPicker)d;
 
             picker.Red = newColor.R;

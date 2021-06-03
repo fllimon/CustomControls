@@ -4,20 +4,28 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DemoApp" 
-        xmlns:myControl="clr-namespace:MenuButton;assembly=MenuButton"
+        xmlns:menuButton="clr-namespace:MenuButton;assembly=MenuButton"
+        xmlns:colorPicker="clr-namespace:ColorPicker;assembly=ColorPicker"
         mc:Ignorable="d"
         Background="DarkCyan"
-        Height="450" Width="800">
+        Height="600" Width="600">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MenuButton;component/Themes/MenuButton.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/ColorPicker;component/Themes/ColorPicker.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
     
     <Grid>
-        <Border VerticalAlignment="Top"
+        <colorPicker:ColorPicker Style="{StaticResource ColorPicker}"
+                                 Margin="10"
+                                 Padding="5"
+                                 Width="300"
+                                 HorizontalAlignment="Left"/>
+        
+        <!--<Border VerticalAlignment="Top"
                 HorizontalAlignment="Left">
             <myControl:MenuButton Style="{StaticResource MenuButton}">
                 <myControl:MenuButton.Menu>
@@ -28,6 +36,6 @@
                     </ContextMenu>
                 </myControl:MenuButton.Menu>
             </myControl:MenuButton>
-        </Border>
+        </Border>-->
     </Grid>
 </Window>
