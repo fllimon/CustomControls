@@ -8,10 +8,41 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ColorPicker}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                    </Border>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>                                                <Slider Name="PART_RedSlider" 
+                            Minimum="0"
+                            Maximum="255"
+                            Margin="{TemplateBinding Padding}"/>
+                        <Slider Name="PART_GreenSlider"
+                            Grid.Row="1"
+                            Minimum="0"
+                            Maximum="255"
+                            Margin="{TemplateBinding Padding}"/>
+                        <Slider Name="PART_BlueSlider"
+                            Grid.Row="2"
+                            Minimum="0"
+                            Maximum="255"
+                            Margin="{TemplateBinding Padding}"/>
+
+                        <Rectangle Grid.Column="1"
+                                   Grid.RowSpan="3"
+                                   Margin="{TemplateBinding Padding}"
+                                   Width="50"
+                                   Stroke="#ff3f3f3f"
+                                   StrokeThickness="1">
+                            <Rectangle.Fill>
+                                <SolidColorBrush x:Name="PART_PreviewBrush"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
