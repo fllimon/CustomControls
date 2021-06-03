@@ -46,9 +46,92 @@ namespace ColorPicker
     /// </summary>
     public class ColorPicker : Control
     {
+        public static readonly DependencyProperty RedProperty;
+        public static readonly DependencyProperty GreenProperty;
+        public static readonly DependencyProperty BlueProperty;
+        public static readonly DependencyProperty ColorProperty;
+
         static ColorPicker()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ColorPicker), new FrameworkPropertyMetadata(typeof(ColorPicker)));
+
+            ColorProperty = DependencyProperty.Register("Color", typeof(Color), typeof(ColorPicker),
+                                                        new FrameworkPropertyMetadata(new PropertyChangedCallback(OnColorChanged)));
+
+            RedProperty = DependencyProperty.Register("Red", typeof(byte), typeof(ColorPicker),
+                                            new FrameworkPropertyMetadata(new PropertyChangedCallback(OnRGBColorChanged)));
+
+            GreenProperty = DependencyProperty.Register("Green", typeof(byte), typeof(ColorPicker),
+                                            new FrameworkPropertyMetadata(new PropertyChangedCallback(OnRGBColorChanged)));
+
+            BlueProperty = DependencyProperty.Register("Blue", typeof(byte), typeof(ColorPicker),
+                                            new FrameworkPropertyMetadata(new PropertyChangedCallback(OnRGBColorChanged)));
+
+        }
+
+
+
+        public Color Color
+        {
+            get { return (Color)GetValue(ColorProperty); }
+            set { SetValue(ColorProperty, value); }
+        }
+
+        public byte Red
+        {
+            get { return (byte)GetValue(RedProperty); }
+            set { SetValue(RedProperty, value); }
+        }
+
+        public byte Green
+        {
+            get { return (byte)GetValue(GreenProperty); }
+            set { SetValue(GreenProperty, value); }
+        }
+
+        public byte Blue
+        {
+            get { return (byte)GetValue(BlueProperty); }
+            set { SetValue(BlueProperty, value); }
+        }
+
+        private static void OnRGBColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ColorPicker picker = (ColorPicker)d;
+            Color color = picker.Color;
+
+            if (e.Property == RedProperty)
+            {
+                color.R = (byte)e.NewValue;
+            }
+            else
+            {
+                if (e.Property == GreenProperty)
+                {
+                    color.G = (byte)e.NewValue;
+                }
+                else
+                {
+                    if (e.Property == BlueProperty)
+                    {
+                        color.B = (byte)e.NewValue;
+                    }
+                }
+            }
+
+            picker.Color = color;
+        }
+
+        private static void OnColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            Color newColor = (Color)e.NewValue;
+            Color oldColor = (Color)e.OldValue;
+
+            ColorPicker picker = (ColorPicker)d;
+
+            picker.Red = newColor.R;
+            picker.Green = newColor.G;
+            picker.Blue = newColor.B;
         }
     }
 }
