@@ -6,4 +6,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MenuButton\MenuButton.csproj" />
+  </ItemGroup>
+
 </Project>
