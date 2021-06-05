@@ -41,11 +41,9 @@
                                    Margin="{TemplateBinding Padding}"
                                    Width="50"
                                    Stroke="#ff3f3f3f"
-                                   StrokeThickness="1">
-                            <Rectangle.Fill>
-                                <SolidColorBrush Color="{Binding Color, RelativeSource={RelativeSource AncestorType={x:Type local:ColorPicker}},
-                                    Converter={StaticResource _cnv}}"/>
-                            </Rectangle.Fill>
+                                   StrokeThickness="1"
+                                   Fill="{Binding Color, RelativeSource={RelativeSource AncestorType={x:Type local:ColorPicker}},
+                                         Converter={StaticResource _cnv}}">
                         </Rectangle>
                     </Grid>
                 </ControlTemplate>

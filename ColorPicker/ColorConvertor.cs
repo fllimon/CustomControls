@@ -13,11 +13,11 @@ namespace ColorPicker
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is Color)
+            if (value is Color color)
             {
-                Color color = (Color)value;
+                Brush brush = new SolidColorBrush(color);
 
-                return new SolidColorBrush(color);
+                return brush;
             }
 
             Type type = value.GetType();
