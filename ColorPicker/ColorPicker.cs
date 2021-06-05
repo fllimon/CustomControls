@@ -46,9 +46,6 @@ namespace ColorPicker
     ///
     /// </summary>
 
-    [TemplatePart(Name = "PART_RedSlider", Type = typeof(RangeBase))]
-    [TemplatePart(Name = "PART_GreenSlider", Type = typeof(RangeBase))]
-    [TemplatePart(Name = "PART_BlueSlider", Type = typeof(RangeBase))]
     public class ColorPicker : Control
     {
         public static readonly DependencyProperty RedProperty;
@@ -73,8 +70,6 @@ namespace ColorPicker
                                             new FrameworkPropertyMetadata(new PropertyChangedCallback(OnRGBColorChanged)));
 
         }
-
-
 
         public Color Color
         {
@@ -109,19 +104,13 @@ namespace ColorPicker
             {
                 color.R = (byte)e.NewValue;
             }
-            else
+            else if (e.Property == GreenProperty)
             {
-                if (e.Property == GreenProperty)
-                {
-                    color.G = (byte)e.NewValue;
-                }
-                else
-                {
-                    if (e.Property == BlueProperty)
-                    {
-                        color.B = (byte)e.NewValue;
-                    }
-                }
+                color.G = (byte)e.NewValue;
+            }
+            else if (e.Property == BlueProperty)
+            {
+                color.B = (byte)e.NewValue;
             }
 
             picker.Color = color;
@@ -135,37 +124,6 @@ namespace ColorPicker
             picker.Red = newColor.R;
             picker.Green = newColor.G;
             picker.Blue = newColor.B;
-        }
-
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-            ApplyTemplate("PART_RedSlider", "Red");
-            ApplyTemplate("PART_GreenSlider", "Green");
-            ApplyTemplate("PART_BlueSlider", "Blue");
-
-            SolidColorBrush brush = GetTemplateChild("PART_PreviewBrush") as SolidColorBrush;
-            
-            if (brush != null)
-            {
-                Binding bind = new Binding("Color");
-                bind.Source = brush;
-                bind.Mode = BindingMode.OneWayToSource;
-                SetBinding(ColorProperty, bind);
-            }
-        }
-
-        private void ApplyTemplate(string templatePartName, string propName)
-        {
-            RangeBase slider = GetTemplateChild(templatePartName) as RangeBase;
-
-            if (slider != null)
-            {
-                Binding bind = new Binding(propName);
-                bind.Source = this;
-                bind.Mode = BindingMode.TwoWay;
-                slider.SetBinding(RangeBase.ValueProperty, bind);
-            }
         }
     }
 }

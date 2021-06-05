@@ -2,7 +2,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:ColorPicker">
-
+    
+    <local:ColorConvertor x:Key="_cnv"/>
 
     <Style x:Key="ColorPicker" TargetType="{x:Type local:ColorPicker}">
         <Setter Property="Template">
@@ -42,7 +43,8 @@
                                    Stroke="#ff3f3f3f"
                                    StrokeThickness="1">
                             <Rectangle.Fill>
-                                <SolidColorBrush x:Name="PART_PreviewBrush"/>
+                                <SolidColorBrush Color="{Binding Color, RelativeSource={RelativeSource AncestorType={x:Type local:ColorPicker}},
+                                    Converter={StaticResource _cnv}}"/>
                             </Rectangle.Fill>
                         </Rectangle>
                     </Grid>
