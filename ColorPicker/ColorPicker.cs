@@ -71,16 +71,21 @@ namespace ColorPicker
 
         }
 
-        public Color Color
+        public ColorPicker()
         {
-            get { return (Color)GetValue(ColorProperty); }
-            set { SetValue(ColorProperty, value); }
+            Color = Colors.Black;
+        }
+
+        public Color Color 
+        {
+            get => (Color)GetValue(ColorProperty);
+            set => SetValue(ColorProperty, value);
         }
 
         public byte Red
         {
-            get { return (byte)GetValue(RedProperty); }
-            set { SetValue(RedProperty, value); }
+            get => (byte)GetValue(RedProperty);
+            set => SetValue(RedProperty, value);
         }
 
         public byte Green
@@ -91,8 +96,8 @@ namespace ColorPicker
 
         public byte Blue
         {
-            get { return (byte)GetValue(BlueProperty); }
-            set { SetValue(BlueProperty, value); }
+            get => (byte)GetValue(BlueProperty);
+            set => SetValue(BlueProperty, value);
         }
 
         private static void OnRGBColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
