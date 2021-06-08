@@ -51,6 +51,7 @@ namespace ColorPicker
         public static readonly DependencyProperty RedProperty;
         public static readonly DependencyProperty GreenProperty;
         public static readonly DependencyProperty BlueProperty;
+        public static readonly DependencyProperty AlphaProperty;
         public static readonly DependencyProperty ColorProperty;
 
         static ColorPicker()
@@ -69,11 +70,8 @@ namespace ColorPicker
             BlueProperty = DependencyProperty.Register("Blue", typeof(byte), typeof(ColorPicker),
                                             new FrameworkPropertyMetadata(new PropertyChangedCallback(OnRGBColorChanged)));
 
-        }
-
-        public ColorPicker()
-        {
-            Color = Colors.Black;
+            AlphaProperty = DependencyProperty.Register("Alpha", typeof(byte), typeof(ColorPicker),
+                                            new FrameworkPropertyMetadata(new PropertyChangedCallback(OnRGBColorChanged)));
         }
 
         public Color Color 
@@ -100,6 +98,12 @@ namespace ColorPicker
             set => SetValue(BlueProperty, value);
         }
 
+        public byte Alpha
+        {
+            get => (byte)GetValue(AlphaProperty);
+            set => SetValue(AlphaProperty, value);
+        }
+
         private static void OnRGBColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             ColorPicker picker = (ColorPicker)d;
@@ -117,6 +121,10 @@ namespace ColorPicker
             {
                 color.B = (byte)e.NewValue;
             }
+            else if (e.Property == AlphaProperty)
+            {
+                color.A = (byte)e.NewValue;
+            }
 
             picker.Color = color;
         }
@@ -129,6 +137,7 @@ namespace ColorPicker
             picker.Red = newColor.R;
             picker.Green = newColor.G;
             picker.Blue = newColor.B;
+            picker.Alpha = newColor.A;
         }
     }
 }

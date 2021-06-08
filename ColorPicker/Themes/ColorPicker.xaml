@@ -5,38 +5,123 @@
     
     <local:ColorConvertor x:Key="_cnv"/>
 
+    <Style x:Key="SliderThumbStyle" 
+           TargetType="Thumb">
+        <Setter Property="SnapsToDevicePixels" 
+                Value="true"/>
+        <Setter Property="OverridesDefaultStyle" 
+                Value="false"/>
+        <Setter Property="Height" 
+                Value="18"/>
+        <Setter Property="Width" 
+                Value="18"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Ellipse Stroke="#ff3f3f3f" 
+                             StrokeThickness="1" 
+                             Name="Elipse"
+                             Fill="#7dc90a"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" 
+                                 Value="True">
+                            <Setter TargetName="Elipse" 
+                                    Property="Fill" 
+                                    Value="#e33232"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="Slider" x:Key="AppSliderStyle">
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Slider">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" Name="row" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" Name="column" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Border  BorderBrush="Black" 
+                                 Name="PART_Border" 
+                                 BorderThickness="1"
+                                 Padding="2"
+                                 Grid.Row="1" Grid.Column="1"
+                                 Width="{TemplateBinding Width}"
+                                 Height="{TemplateBinding Height}"
+                                 Background="#0e9c38"
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Center" />
+                        
+                        <Track HorizontalAlignment="Stretch" 
+                               Name="PART_Track"
+                               VerticalAlignment="Center"
+                               Grid.Row="1" Grid.Column="1"
+                               Width="{TemplateBinding Width}"
+                               Height="{TemplateBinding Height}">
+                            
+                            <Track.Thumb>
+                                <Thumb Style="{StaticResource SliderThumbStyle}" />
+                            </Track.Thumb>
+                        </Track>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="ColorPicker" TargetType="{x:Type local:ColorPicker}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ColorPicker}">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>                                                <Slider  Minimum="0"
+                        </Grid.ColumnDefinitions>                        <Slider  Minimum="0"
                             Maximum="255"
                             Value="{Binding Red, RelativeSource={RelativeSource AncestorType={x:Type local:ColorPicker}}, Mode=TwoWay}"
-                            Margin="{TemplateBinding Padding}"/>
+                            Margin="{TemplateBinding Padding}" Style="{StaticResource AppSliderStyle}"/>
+                        
                         <Slider Grid.Row="1"
                             Minimum="0"
                             Maximum="255"
                             Value="{Binding Green, RelativeSource={RelativeSource AncestorType={x:Type local:ColorPicker}}, Mode=TwoWay}"
-                            Margin="{TemplateBinding Padding}"/>
+                            Margin="{TemplateBinding Padding}" Style="{StaticResource AppSliderStyle}"/>
+                        
                         <Slider Grid.Row="2"
                             Minimum="0"
                             Maximum="255"
                             Value="{Binding Blue, RelativeSource={RelativeSource AncestorType={x:Type local:ColorPicker}}, Mode=TwoWay}"
-                            Margin="{TemplateBinding Padding}"/>
+                            Margin="{TemplateBinding Padding}" Style="{StaticResource AppSliderStyle}"/>
 
+                        <Slider Grid.Row="3"
+                            Minimum="0"
+                            Maximum="255"
+                            Value="{Binding Alpha, RelativeSource={RelativeSource AncestorType={x:Type local:ColorPicker}}, Mode=TwoWay}"
+                            Margin="{TemplateBinding Padding}" Style="{StaticResource AppSliderStyle}"/>
+                        
                         <Rectangle Grid.Column="1"
-                                   Grid.RowSpan="3"
+                                   Grid.RowSpan="4"
                                    Margin="{TemplateBinding Padding}"
-                                   Width="50"
+                                   Width="80"
                                    Stroke="#ff3f3f3f"
                                    StrokeThickness="1"
                                    Fill="{Binding Color, RelativeSource={RelativeSource AncestorType={x:Type local:ColorPicker}}, Mode=TwoWay,
